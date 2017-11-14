@@ -1,0 +1,42 @@
+{
+    "total" : 3,
+    "status": 200,
+    "data" : [
+        {
+            "id": "001",
+            "name": "张三",
+            "gender": "男",
+            "jobno": "001",
+            "mobile": "133333333",
+            "extension_number": "13245658",
+            "department": "研发部",
+            "job": "设计师",
+            "compny_email": "lalal@email.com"
+
+        },
+        {
+            "id": "002",
+            "name": "李四",
+            "gender": "男",
+            "jobno": "003",
+            "mobile": "122222223",
+            "extension_number": "321321312213",
+            "department": "研发部",
+            "job": "硬件工程师",
+            "compny_email": "lalal@email.com"
+
+        },
+        {
+            "id": "003",
+            "name": "王美丽",
+            "gender": "女",
+            "jobno": "003",
+            "mobile": "15232312513",
+            "extension_number": "23154534",
+            "department": "研发部",
+            "job": "软件工程师",
+            "compny_email": "lalal@email.com"
+
+        }
+    ]
+  }

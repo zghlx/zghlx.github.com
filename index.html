@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./public/layui/layui.js"></script>
+    <script src="./public/js/iconfont.js"></script>
+    <script src="./public/datatabales/js/jquery.js"></script>
+    <link rel="stylesheet" href="./public/layui/css/layui.css">
+    <link rel="stylesheet" href="./public/css/main.css">
+    <title>哐哐智造-云+平台</title>
+</head>
+
+<body>
+    <div class="fullinfo">
+        <div class="layui-row">
+            <div class="layui-col-md5 left-description description">
+                <!-- 左侧信息栏 -->
+                <!--  公司信息图片和title -->
+                <div class="compny-msg-top">
+                    <div class="compny-photo"></div>
+                    <h1 class="compny-title">飞新达智能设备有限公司</h1>
+                </div>
+                <!-- 公司简介 -->
+                <div class="compony-des">
+                    <p class="title">公司简介</p>
+                    <div class="desc">
+                        广东飞新达智能设备股份有限公司【股票代码：832872】成立于2008年，是一家以“智慧制造”为核心的3C产业智能自动化装备提供商。<br> 凭借多年的自动化装备研发经验与3C电子产业链的客群优势，于2015年提出了一站式3C智能终端生产理念，独创的“平台+ODM(Original
+                        design manufacture)”模式整合了全球领先的技术模块，打破原有装备生产设备迭代周期长的瓶颈，围绕“自动化装备、信息控制系统、智慧工厂”三大核心，提供从柔性材料冲切、精密成型、组装贴合、智能检测、自动包装、工业机器人等全方位智能生产装备，融合数字信息技术提供自动化物流仓储系统、物联网感应系统、制造集成信息系统、可视化车间管理系统等生产数字化的软件服务，打造了“硬件+软件，平台＋整合”一站式3C产业智能化制造解决方案。
+                    </div>
+                </div>
+
+            </div>
+            <div class="layui-col-md7 description">
+                <!-- 右侧信息栏 -->
+                <!--  企业执照 -->
+                <div class="compny-picture">
+                    <div class="picture-container">
+                        <img src="http://img0.imgtn.bdimg.com/it/u=2768589313,2639659683&fm=27&gp=0.jpg" alt="营业执照">
+                        <svg class="icon passed" aria-hidden="true">
+                            <use xlink:href="#icon-yirenzheng"></use>
+                        </svg>
+                    </div>
+                    <div class="compny-code">
+                        营业执照号：<span>66666666666666*****</span>
+                    </div>
+                </div>
+                <!-- 公司详细信息 -->
+                <div class="compny-info passed">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">所属行业：</label>
+                            <div class="layui-input-block">
+                                机电行业
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">联系电话：</label>
+                            <div class="layui-input-block">
+                                0769-8326-100
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">公司网址：</label>
+                            <div class="layui-input-block">
+                                https://www.kitwee.com
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">系统入口：</label>
+                            <div class="layui-input-block">
+                                https://www.kitwee.com
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">公司地址：</label>
+                            <div class="layui-input-block">
+                                深圳市龙华新区龙观东路1号望成大厦10楼1001室
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"><button class="layui-btn" data-type="setCompnyMsg">设置信息</button></label>
+                            <div class="layui-input-block"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="sidebar">
+        <div id="compny-name" onclick="showcompny()">
+            <span>某某</span>·数+
+        </div>
+        <div id="compny-info">
+            <div class="user-photo"></div>
+            <div class="user-info">
+                <p class="nickname">飞新达智能设备有限公司<span class="loginout-icon"></span></p>
+                <p class="mobile">15012345678</p>
+                <!-- <p class="loginout"><i class="layui-icon">&#xe614;</i></p> -->
+            </div>
+        </div>
+        <ul class="layui-nav layui-nav-tree" lay-filter="navmenu">
+            <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+            <li class="layui-nav-item layui-nav-itemed">
+                <a href="javascript:;"><i class="layui-icon">&#xe628;</i>首页</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;" _href="./public/html/table.html" id="tables">表格</a></dd>
+                    <dd><a href="javascript:;" _href="./public/html/tree.html" id="tree">树形菜单</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="layui-icon">&#xe62d;</i>富文本编辑器</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;" _href="./public/html/editor.html" id="editor">富文本编辑器</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="layui-icon">&#xe62e;</i>树形菜单</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;" _href="./public/html/editor.html">树形菜单</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="layui-icon">&#xe62e;</i>公司信息</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;" _href="./public/html/structure.html">公司审核</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <!-- 侧边栏折叠切换按钮 -->
+        <div id="slider-btn">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-zhedie-"></use>
+            </svg>
+        </div>
+    </div>
+    <!-- 主内容 -->
+    <div id="main">
+        <div class="layui-tab" lay-allowClose="true" lay-filter="tab-bar">
+            <ul class="layui-tab-title"></ul>
+            <div class="layui-tab-content"></div>
+        </div>
+    </div>
+    <script>
+        layui.use(['jquery', 'layer'], function () {
+            var $ = layui.$ //这样可以在里面用jquery的写法
+                ,
+                layer = layui.layer;
+
+            console.log($(parent.parent).location)
+            $('#slider-btn').click(function () {
+                $('#sidebar').toggleClass('sidebar-in');
+                $('#main').toggleClass('sidebar-in')
+                if ($('#sidebar').hasClass('sidebar-in')) {
+                    $('.layui-nav-item').addClass('layui-nav-itemed')
+                } else {
+                    $('.layui-nav-item').removeClass('layui-nav-itemed')
+                }
+            })
+
+
+        });
+        layui.use(['element', 'layer'], function () {
+            var element = layui.element;
+            var layer = layui.layer;
+            //监听折叠
+            //监听导航点击
+            element.on('nav(navmenu)', function (elem) {
+                var new_tab_url = elem[0].children[0].attributes[1].nodeValue; //新增tab的url值
+                var new_tab_id = elem[0].children[0].id;
+                var new_tab_titlt = elem.text(); //新增tab的文本内容
+                var items_id = document.querySelectorAll('[lay-id="' + new_tab_id + '"]');
+                console.log(items_id)
+                if (items_id.length <= 0) {
+                    element.tabAdd('tab-bar', {
+                        title: new_tab_titlt,
+                        content: '<iframe src=' + new_tab_url +
+                            ' frameborder="0"></iframe>',
+                        id: new_tab_id //这里的id值和 navmenu的id一一对应
+
+                    });
+                }
+                element.tabChange('tab-bar', new_tab_id)
+            });
+            //监听切换tab的事件
+            element.on('tab(tab-bar)', function (data) {
+                var this_tab_id = this.attributes[0].nodeValue;
+                console.log(this_tab_id)
+                if(!!this_tab_id){
+                    $('dl.layui-nav-child>dd').removeClass('layui-this');
+                    $('#' + this_tab_id).parent('dd').addClass('layui-this').parents('li.layui-nav-item').addClass('layui-nav-itemed')
+                }
+            });
+
+        });
+
+        /*  展示公司信息 */
+        function showcompny() {
+            $('.fullinfo').toggleClass('trans')
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../layui/layui.js"></script>
+    <script src="../datatabales/js/jquery.js"></script>
+    <script src="../datatabales/js/jquery.dataTables.min.js"></script>
+    <script src="../js/iconfont.js"></script>
+    <script src="../js/kitwee.js"></script>
+    <link rel="stylesheet" href="../datatabales/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../css/iconfont.css">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <title>表格</title>
+</head>
+
+<body>
+    <!-- 内容页 -->
+    <div id="content">
+        <!-- 工具及搜索栏 -->
+        <div class="tool-container demoTable">
+            <!-- 搜索栏 -->
+            <div class="handle-item">
+                搜索订单编号：
+                <div class="layui-inline">
+                    <input class="layui-input" name="id" id="demoSearch" autocomplete="off" placeholder="输入要查询的内容">
+                    <input class="layui-input" name="id" id="demoSearch2" autocomplete="off" placeholder="输入要查询的内容">
+                </div>
+                <button class="layui-btn" data-type="search">搜索</button>
+                <!-- 常用工具按钮栏 如 增删改等-->
+                <div class="fr common-tool-bar">
+                    <!-- <button class="layui-btn" data-type="deleteDatas">删除多行</button> -->
+                    <div class="tableTools fr">
+                        <div class="">
+                            <button class="layui-btn " data-type="getCheckData">查看选中行</button>
+                            <button class="layui-btn layui-btn-danger" data-type="deleteData">删除选中行</button>
+                            <button class="layui-btn layui-btn-normal" data-type="addData">添加用户</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 额外添加的一些工具栏 -->
+            <div class="layui-clear extra-tool-bar">
+                <div class="tableTools fr">
+                    <div class="">
+                        <button class="layui-btn" data-type="exportpdf">导出PDF</button>
+                        <button class="layui-btn" data-type="exportexcel">导出excel</button>
+                        <button class="layui-btn" data-type="print">打印</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table id="table_id_example" class="display" class="kk-tables">
+            <thead>
+                <th>
+                    <a type="button" class="checkedbtn checkedall" onclick="checkedAll()">
+                            <i class="iconfont icon-weixuanzhong"></i>
+                    </a>
+                </th>
+                <th>订单名称</th>
+                <th>订单状态</th>
+                <th>公司Id</th>
+                <th>订单备注</th>
+                <th>工具栏</th>
+            </thead>
+        </table>
+    </div>
+    <script>
+
+        /*  编辑表格 */
+        function editFromId(id) {
+            kit.open_window('#edit-msg', {
+                title: '编辑'
+            });
+        }
+
+        var table = $('#table_id_example').DataTable({
+            ajax: {
+                url: '../../public/demojson/demo.json',
+                dataSrc: 'data'
+            },
+            columns: [
+                {
+                    data: null
+                },
+                {
+                    data: 'order_name'
+                },
+                {
+                    data: 'order_status_value'
+                },
+                {
+                    data: 'order_content'
+                },
+                {
+                    data: 'creator_displayname'
+                },
+                {
+                    data: null
+                }
+            ],
+            columnDefs: [
+                {
+                    targets: 0,
+                    render: function(data, type, row, meta){
+                        
+                        return `
+                        <a type="button" class="checkedbtn checkedone" onclick="checkedone()">
+                            <i class="iconfont icon-weixuanzhong"></i>
+                        </a>
+                        `;
+                    }
+                },
+                {
+                    targets: 5,
+                    render: function(data, type, row, meta) {
+                        console.log(row)
+                        return `<a type="button" class="table-btn edit" href="#" onclick=editFromId('${row.id}') title="编辑">
+                                        <i class="iconfont icon-xiugai"></i>
+                                    </a>
+                                    <a type="button" class="table-btn delete" href="#" onclick=delFromID(' + row.id + ') title="删除">
+                                        <i class="iconfont icon-shanchu"></i>
+                                    </a>
+                                `;
+                    }
+                },
+                { "orderable": false, "targets": [0,5] }
+            ],
+            sScrollY: 600
+        });
+    
+
+
+        $('#table_id_example tbody').on('click', 'tr', function () {
+
+            if( $(this)[0]['children'][0]['children'][0]['children'][0].className === 'iconfont icon-xuanzhong') {
+                table.$('tr.checked').removeClass('checked');
+                $(this)[0]['children'][0]['children'][0]['children'][0].className = 'iconfont icon-weixuanzhong';
+            }else {
+                $(this)[0]['children'][0]['children'][0]['children'][0].className = 'iconfont icon-xuanzhong';
+                $(this).addClass('checked');
+            }
+        });
+
+        layui.use(['element', 'layer', 'form'], function () {
+            var element = layui.element;
+            var layer = layui.layer;
+            var form = layui.form;
+            //监听折叠
+            // element.on('collapse(test)', function (data) {
+            //     layer.msg('展开状态：' + data.show);
+            // });
+        });
+        $(function () {
+            /*  填出的表单 */
+
+        /* 按钮的事件都绑定在这里 */
+        var active = {
+            getCheckData: function () { //获取选中数据
+                var rowsdata = table.rows('.checked').data();
+                console.log(rowsdata)
+                var dcontent = '';
+                
+                rowsdata.each(function(d, index) {
+                    dcontent+= `第${index+1}行的id值是： ${d.id}`;
+                });
+                alert(`你选中了${rowsdata.length}行，${dcontent}`);
+                console.log( table.rows('.checked').data().length);
+            },
+            deleteData: function () {
+                layui.use('layer', function () {
+                    var layer = layui.layer;
+                    layer.confirm('确定要删除选择的内容？', {
+                        btn: ['确定', '取消'],
+                        yes: function (index, layero) { //删除
+                            table.row('.selected').remove().draw(false);
+                            layer.close(index);
+                            /* 删除成功后的提示 */
+                            layer.open({
+                                content: '删除成功',
+                                yes: function (index, layero) {
+                                    //do something
+                                    layer.close(index); //如果设定了yes回调，需进行手工关闭
+                                }
+                            });
+                        },
+                        btn2: function (index, layero) { //取消
+                        }
+                    })
+
+                })
+
+
+            },
+            addData: function () {
+                kit.open_window('#add-msg', {
+                    title: '新增'
+                });
+            },
+            search: function () {
+                //  $(seleter).DataTable().search(  searchValue,  是否使用正则, 是否使用智能搜索 )
+                var a = $('#demoSearch').val();
+                var b = $('#demoSearch2').val();
+                $('#table_id_example').DataTable().search( a + " "+ b).draw();
+                // console.log(reg)
+                // $('#table_id_example').DataTable().column().search(reg, true, false).draw();
+            },
+            exportpdf: function() {
+
+            }
+        }
+
+
+        $('.demoTable .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+        });
+    </script>
+</body>
+
+<!--  使用新增窗口的必要步骤 -->
+<!--  新增编辑窗口的外部class名字必须为 kitwee-window, id值必须指定 -->
+<!--  打开窗口的方法是  kit.open_window(window_id, option, callback) -->
+<!--  绑定到新增按钮  首先按钮的写法 是  <button class="layui-btn" data-type="search">搜索</button> -->
+<!--  上面按钮的class名字统一必须有layui-btn  data-type为绑定按钮  然后在写的 var active = {} 中去绑定事件的方法名字 与 data-type ="" 中的值一致 -->
+
+<div id="edit-msg" class="kitwee-window">
+    <div class="kitwee-window-header">
+        <span class="kitwee-window-title fl"></span>
+        <span class="kitwee-window-close fr" onclick="kit.close_window()">关闭</span>
+    </div>
+    <div class="kitwee-window-content">
+        <form class="layui-form" action="dd.html">
+            <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+            <div class="layui-form-item">
+                <label class="layui-form-label">输入框</label>
+                <div class="layui-input-block">
+                    <input type="text" name="somestr" placeholder="请输入" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">下拉选择框</label>
+                <div class="layui-input-block">
+                    <select name="interest" lay-filter="aihao">
+                      <option value="0">写作</option>
+                      <option value="1">阅读</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">复选框</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="like[write]" title="写作">
+                    <input type="checkbox" name="like[read]" title="阅读">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">开关关</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" lay-skin="switch">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">开关开</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" checked lay-skin="switch">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">单选框</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="sex" value="0" title="男">
+                    <input type="radio" name="sex" value="1" title="女" checked>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">请填写描述</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="add-msg" class="kitwee-window">
+        <div class="kitwee-window-header">
+            <span class="kitwee-window-title fl"></span>
+            <span class="kitwee-window-close fr" onclick="kit.close_window()">关闭</span>
+        </div>
+        <div class="kitwee-window-content">
+            <form class="layui-form" action="dd.html">
+                <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+                <div class="layui-form-item">
+                    <label class="layui-form-label">输入框</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="somestr" placeholder="请输入" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">下拉选择框</label>
+                    <div class="layui-input-block">
+                        <select name="interest" lay-filter="aihao">
+                          <option value="0">写作</option>
+                          <option value="1">阅读</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">复选框</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" name="like[write]" title="写作">
+                        <input type="checkbox" name="like[read]" title="阅读">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">开关关</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" lay-skin="switch">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">开关开</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" checked lay-skin="switch">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">单选框</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="sex" value="0" title="男">
+                        <input type="radio" name="sex" value="1" title="女" checked>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">请填写描述</label>
+                    <div class="layui-input-block">
+                        <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</html>

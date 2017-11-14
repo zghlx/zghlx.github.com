@@ -1,0 +1,449 @@
+/* common style*/
+html,body{
+    width: 100%;
+    height: 100%;
+    font-family: 'MicroSoft YaHei'
+}
+.layui-nav-itemed{
+    background-color:#4e5465
+}
+.layui-nav-itemed .layui-nav-child{
+    background-color:#282b33
+}
+.cfix, .cfix:after {
+    display: table;
+    clear: both;
+    content: "";
+}
+input[name="seacrh-input"]{
+    margin-top: 5px;
+    height: 28px;
+    text-indent: 4px;
+    color: #666;
+    transition: width .3s linear;
+    width: 150px;
+}
+input[name="seacrh-input"]:focus{
+    width: 200px;
+    transition: width .3s linear;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+iframe{
+    width: 100%;
+    height: 100%;
+}
+.kk-inner-wrap{
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+}
+.main-content{
+    width: 100%;
+    margin-top: 20px;
+    min-height: calc(100% - 58px);
+}
+#content{
+    min-height: 100%;
+}
+#table_demo_filter{
+    display: none;
+}
+
+/* 下拉列表树形菜单样式 */
+
+.select-tree{
+    display: block;
+    width: 100%;
+}
+
+/*  弹出层公用样式 */
+.kitwee-window {
+    position: fixed;
+    right: -40%;
+    top: 0;
+    width: 40%;
+    height: 100%;
+    background-color: #e2e3e8;
+    transition: right 0.3s ease;
+}
+.kitwee-window.show{
+    right: 0;
+}
+.kitwee-window .kitwee-window-header{
+    background-color: #1ab394;
+    color: #fff;
+    text-indent: 24px;
+    height: 38px;
+    line-height: 38px;
+    font-size: 18px;
+}
+.kitwee-window .kitwee-window-header .kitwee-window-title{
+    width: calc(100% - 72px);
+}
+.kitwee-window .kitwee-window-header .kitwee-window-close {
+    width: 60px;
+    cursor: pointer;
+    padding-right: 12px;
+}
+.kitwee-window .layui-form{
+    padding-top: 24px;
+    padding-right: 24px;
+}
+
+/* 通用修改layuicss的部分 */
+.layui-row{
+    height: 100%;
+}
+.layui-tab,.layui-tab-item{
+    height: 100%;
+}
+.layui-tab-content{
+    height: calc(100% - 60px)
+}
+.table-box tfoot th, .table-box thead th{
+    font-size: 15px;
+    font-weight: 400;
+    border-left: 1px solid #ddd;
+    white-space: nowrap;
+    line-height: 34px;
+    padding: 0 10px 0 3px;
+    text-align: center;
+}
+.table-box{
+    width: 100%;
+    border: 1px solid #ddd;
+    border-collapse: separate;
+    margin-top: 0;
+    border-left: 0;
+}
+/*  iconfont style */
+.icon {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+ }
+
+ /*  silder style start */
+#sidebar{
+    width: 240px;
+    height: 100%;
+    background-color: #393d49;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+}
+#sidebar .layui-icon{
+    margin-right: 16px;
+}
+/*  用户信息面版 */
+.fullinfo{
+    width: 50%;
+    height: 100%;
+    position: fixed;
+    left: 240px;
+    background-color: #e2e3e8;
+    text-align: center;
+    transform: translateX(-120%);
+    transition: transform .3s ease-in;
+    z-index: 3;
+}
+.fullinfo.trans{
+    transform: translateX(0);
+}
+.fullinfo .description{
+    height: 100%;
+    
+}
+.fullinfo .left-description{
+    background-color: #1ab394;
+    color: #fff;
+}
+.fullinfo .left-description .compny-msg-top{
+    height: 25%;
+}
+.compny-photo{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-image: url('https://ss0.baidu.com/73t1bjeh1BF3odCf/it/u=796268951,3167457644&fm=85&s=6202940970F067949F15699D0300D0E0');
+    background-size: cover;
+    background-position: 50% 50%;
+    margin: 30px auto;
+}
+.compny-title{
+    font-size: 26px;
+}
+
+.compony-des .title{
+    margin: auto;
+    margin-bottom: 12px;
+    width: 100px;
+    background-color: #fff;
+    height: 28px;
+    line-height: 28px;
+    color: #1ab394;
+    font-size: 18px;
+}
+.compony-des .desc{
+    padding: 24px;
+    text-align: justify;
+    font-size: 14px;
+    font-size: 16px;
+    line-height: 26px;
+}
+
+/*  企业执照 */
+.compny-picture{
+    height: 40%;
+    width: 95%;
+    margin: auto;
+    border-bottom: 2px solid #cfd0d4;
+}
+.compny-picture .picture-container{
+    width: 70%;
+    margin: auto;
+    height: 80%;
+    position: relative;
+    margin-top: 30px;
+}
+.compny-picture .picture-container>img{
+    width: 100%;
+    height: auto;
+}
+.compny-picture .picture-container .passed{
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    font-size: 100px;
+    color: #f60000;
+    transform: rotate( -50deg);
+}
+
+.compny-picture .compny-code{
+    margin-top: 20px;
+}
+.compny-info{
+    width: 75%;
+    margin: auto;
+    padding-top: 24px;
+}
+.compny-info.passed .layui-input-block{
+    padding: 9px 15px;
+    text-align: left;
+}
+.compny-info.passed .layui-form-item{
+    margin-bottom: 0;
+}
+#compny-name{
+    width: 100%;
+    height: 64px;
+    color: #fff;
+    padding: 12px 0;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    background-color: #282b33;
+    line-height: 42px;
+    cursor: pointer;
+}
+#compny-info{
+    width: 100%;
+    height: 92px;
+    text-align: center;
+    padding-bottom: 12px;
+    cursor: pointer;
+}
+#compny-info .user-photo{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-image: url(https://www.kitwee.com/images/new/logo.png);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    border: 3px solid #fff;
+    position: relative;
+    top: -30px;
+    left: calc(50% - 30px);
+}
+#compny-info .user-info{
+    display: inline-block;
+    width: 90%;
+    height: 100%;
+    vertical-align: bottom;
+    color:rgb(181, 182, 185);
+    font-size: 14px;
+    margin-top: -12px;
+}
+#compny-info .user-info .nickname{
+    position: relative;
+}
+
+
+#slider-btn {
+    color: #fff;
+    font-size: 20px;
+    position: absolute;
+    bottom: 20px;
+    left: 180px;
+    cursor: pointer;
+    display: none;
+}
+
+
+
+/* 滑行菜单样式 */
+#sidebar.sidebar-in{
+    width: 50px;
+}
+#sidebar.sidebar-in #compny-name,#sidebar.sidebar-in #compny-info{
+    visibility: hidden;
+}
+#sidebar.sidebar-in .layui-nav-item{
+    position: relative;
+}
+#sidebar.sidebar-in .layui-nav-item .layui-nav-child{
+    position: absolute;
+    left: 50px;
+    display: none;
+}
+#sidebar.sidebar-in .layui-nav-item:hover .layui-nav-child{
+    display: block;
+}
+#sidebar.sidebar-in .layui-nav-item>a>.layui-nav-more{
+    display: none;
+}
+#sidebar.sidebar-in #slider-btn{
+    left: 12px;
+}
+
+/* 主内容 */
+#main{
+    width: calc(100% - 240px);
+    background-color: #f5f5f5;
+    padding-left: 240px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}
+#main-header{
+    width: calc(100% - 24px);
+    height: 42px;
+    background-color: #282b33;
+    padding: 0 12px;
+}
+#main #content{
+    padding: 10px 0;
+}
+#main #content .tool-container{
+    padding:10px;
+}
+.extra-tool-bar{
+    margin: 6px 0;
+}
+
+#main.sidebar-in{
+    width: calc(100% - 50px);
+    padding-left: 50px;
+}
+/*  树形菜单页面样式 */
+#tree_demo{
+    width: 300px;
+    float: left;
+    background-color: #fff;
+}
+#tree_msg_panel{
+    float: left;
+    width: 400px;
+    height: 300px;
+    /* background-color: #ccc; */
+    border: 1px solid #ccc;
+}
+
+
+
+/*  新增，编辑等弹出窗口 */
+
+.open-window{
+    width: 50%;
+    height: 100%;
+    padding: 12px;
+    right: 0;
+    top: 0;
+    border-left: 1px solid #666;
+    background-color: #fff;
+}
+.layui-layer{
+    right: 0 !important;
+    top: 0 !important;
+    left: 40% !important;
+}
+#table_id_example_filter{
+    display: none !important;
+
+}
+
+
+
+/*  公司审核页面 */
+.tree-container{
+     width: 300px;
+     height: 100%;
+}
+.tree-container .tree-panel{
+    background-color: #999;
+    width: 100%;
+    height: 100%;
+}
+
+/*  表格修改方式 */
+
+.icon-xiugai:hover{
+    color: #15b697;
+}
+.icon-shanchu:hover{
+    color: #FF5722;
+}
+
+/* 组织架构管理 */
+
+.tree-menu{
+    max-width: 350px;
+    margin-right: 20px;
+    height: 831px;
+}
+
+.table-menu{
+    width: calc(100% - 330px);
+    height: 831px;
+}
+.tree-title,.table-tool{
+    height: 42px;
+    line-height: 42px;
+    font-size: 18px;
+   
+    margin-bottom: 12px;
+}
+.tree-title{
+    background-color: #f2f2f2;
+}
+.tree-title .tree-tool-bar>li{
+    float: left;
+    padding: 0 6px;
+}
+.tree-title .tree-tool-bar>li .iconfont{
+    font-size: 20px;
+}
+.tree-panel{
+    width: 100%;
+    min-height: calc(100% - 54px);
+    background-color: #f2f2f2;
+}

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../layui/layui.js"></script>
+    <script src="../datatabales/js/jquery.js"></script>
+    <script src="../datatabales/js/jquery.dataTables.min.js"></script>
+    <script src="../js/iconfont.js"></script>
+    <script src="../js/kitwee.js"></script>
+    <link rel="stylesheet" href="../datatabales/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../css/iconfont.css">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <title>属性菜单</title>
+</head>
+
+<body>
+    <!-- 内容页 -->
+    <div id="content">
+        <!-- 工具及搜索栏 -->
+        <div class="tool-container demoTable">
+            <!-- 搜索栏 -->
+            <div class="handle-item">
+                搜索订单编号：
+                <div class="layui-inline">
+                    <input class="layui-input" name="id" id="demoSearch" autocomplete="off" placeholder="输入要查询的内容">
+                </div>
+                <button class="layui-btn" data-type="search">搜索</button>
+                <!-- 常用工具按钮栏 如 增删改等-->
+                <div class="fr common-tool-bar">
+                    <!-- <button class="layui-btn" data-type="deleteDatas">删除多行</button> -->
+                    <div class="tableTools fr">
+                        <div class="">
+                            <button class="layui-btn " data-type="getCheckData">批量删除</button>
+                            <button class="layui-btn layui-btn-danger" data-type="deleteData">导入</button>
+                            <button class="layui-btn layui-btn-normal" data-type="addData">导出</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content cfix">
+            <div class="tree-menu fl">
+                <!--  树形头部 -->
+                <div class="tree-title">
+                    <span class="name">组织结构</span>
+
+                    <ul class="tree-tool-bar cfix fr">
+                        <li class="tree-add"><i class="iconfont icon-zengjia"></i></li>
+                        <li class="tree-edit"><i class="iconfont icon-xiugai"></i></li>
+                        <li class="tree-delete"><i class="iconfont icon-shanchu"></i></li>
+                    </ul>
+                </div>
+                <!-- 树形菜单 -->
+                <div class="tree-panel">
+                    <div class="select-tree-panel">
+                        <select name="city" class="select-tree" data-url="" lay-ignore>
+                                
+                        </select>
+                        <ul id="tree_demo" lay-filter='tree_demo'></ul>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="table-menu fr">
+                <!-- 表格的工具栏 -->
+                <div class="table-tool">
+                    <div class="tableTools fr">
+                        <div class="">
+                            <button class="layui-btn" data-type="addmembers">添加成员</button>
+                            <button class="layui-btn" data-type="diytable">自定义表格</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 表格展示 -->
+                <div class="table-panel">
+                    <table id="table_demo" class="display">
+                        <thead>
+                            <th>
+                                <a type="button" class="checkedbtn checkedall" onclick="checkedAll()">
+                                    <i class="iconfont icon-weixuanzhong"></i>
+                                </a>
+                            </th>
+                            <th>操作</th>
+                            <th>姓名</th>
+                            <th>性别</th>
+                            <th>工号</th>
+                            <th>手机号</th>
+                            <th>分机号</th>
+                            <th>部门</th>
+                            <th>职业</th>
+                            <th>公司邮箱</th>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div id="tree_msg_panel">在这里会显示属性菜单的内容</div> -->
+    </div>
+    <script src="../js/kitwee.js"></script>
+    <script>
+        //Demo
+        var table = '';
+        var nodedata = [ //节点
+                    {
+                        name: '制云科技',
+                        id: 1,
+                        alias: 'changyong',
+                        children: [{
+                            name: '研发部',
+                            id: 11
+                        }, {
+                            name: '硬件工程师',
+                            id: 12
+                        }, {
+                            name: '软件工程师',
+                            id: 13
+                        }]
+                    }, {
+                        name: '我的邮箱',
+                        id: 2,
+                        spread: true,
+                        children: [{
+                            name: 'QQ邮箱',
+                            id: 21,
+                            spread: true,
+                            children: [{
+                                name: '收件箱',
+                                id: 211,
+                                children: [{
+                                    name: '所有未读',
+                                    id: 2111
+                                }, {
+                                    name: '置顶邮件',
+                                    id: 2112
+                                }, {
+                                    name: '标签邮件',
+                                    id: 2113
+                                }]
+                            }, {
+                                name: '已发出的邮件',
+                                id: 212
+                            }, {
+                                name: '垃圾邮件',
+                                id: 213
+                            }]
+                        }, {
+                            name: '阿里云邮',
+                            id: 22,
+                            children: [{
+                                name: '收件箱',
+                                id: 221
+                            }, {
+                                name: '已发出的邮件',
+                                id: 222
+                            }, {
+                                name: '垃圾邮件',
+                                id: 223
+                            }]
+                        }]
+                    }, {
+                        name: '收藏夹',
+                        id: 3,
+                        alias: 'changyong',
+                        children: [{
+                            name: '爱情动作片',
+                            id: 31,
+                            alias: 'love'
+                        }, {
+                            name: '技术栈',
+                            id: 12,
+                            children: [{
+                                name: '前端',
+                                id: 121
+                            }, {
+                                name: '全端',
+                                id: 122
+                            }]
+                        }]
+                    }
+                ];
+        $(function () {
+            table = $('#table_demo').DataTable({
+                ordering: false,
+                ajax: {
+                    url: '../../public/demojson/tree.json',
+                    dataSrc: 'data'
+                },
+                columns: [{
+                        data: null
+                    },
+                    {
+                        data: null
+                    },
+                    {
+                        data: 'name'
+                    },
+                    {
+                        data: 'gender'
+                    },
+                    {
+                        data: 'jobno'
+                    },
+                    {
+                        data: 'mobile'
+                    },
+                    {
+                        data: 'extension_number'
+                    },
+                    {
+                        data: 'department'
+                    },
+                    {
+                        data: 'job'
+                    },
+                    {
+                        data: 'compny_email'
+                    }
+                ],
+                columnDefs: [{
+                        targets: 0,
+                        render: function (data, type, row, meta) {
+                            return `
+                        <a type="button" class="checkedbtn checkedone" onclick="checkedone()">
+                            <i class="iconfont icon-weixuanzhong"></i>
+                        </a>
+                        `;
+                        }
+                    },
+                    {
+                        targets: 1,
+                        render: function (data, type, row, meta) {
+                            // console.log(row)
+                            return `<a type="button" class="table-btn edit" href="#" onclick=editFromId('${row.id}') title="编辑">
+                                        <i class="iconfont icon-xiugai"></i>
+                                    </a>
+                                    <a type="button" class="table-btn delete" href="#" onclick=delFromID(' + row.id + ') title="删除">
+                                        <i class="iconfont icon-shanchu"></i>
+                                    </a>
+                                `;
+                        }
+                    },
+                    {
+                        "orderable": false,
+                        "targets": [0, 1]
+                    }
+                ],
+                sScrollY: 600
+            })
+        })
+        layui.use(['tree', 'layer'], function () {
+            var layer = layui.layer,
+                $ = layui.jquery;
+            layui.tree({
+                elem: '#tree_demo' //指定元素
+                    ,
+                target: '_blank' //是否新选项卡打开（比如节点返回href才有效）
+                    ,
+                click: function (item) { //点击节点回调
+                    // document.getElementById('tree_msg_panel').innerHTML = ('当前节名称：' + item.name +
+                    //     '<br>全部参数：' + JSON.stringify(item));
+                    console.log(item);
+                },
+                nodes:  nodedata
+            });
+        });
+
+        console.log(parent.window.location.href)
+    </script>
+</body>
+<!--  使用新增窗口的必要步骤 -->
+<!--  新增编辑窗口的外部class名字必须为 kitwee-window, id值必须指定 -->
+<!--  打开窗口的方法是  kit.open_window(window_id, option, callback) -->
+<!--  绑定到新增按钮  首先按钮的写法 是  <button class="layui-btn" data-type="search">搜索</button> -->
+<!--  上面按钮的class名字统一必须有layui-btn  data-type为绑定按钮  然后在写的 var active = {} 中去绑定事件的方法名字 与 data-type ="" 中的值一致 -->
+
+<div id="add-msg" class="kitwee-window">
+    <div class="kitwee-window-header">
+        <span class="kitwee-window-title fl"></span>
+        <span class="kitwee-window-close fr" onclick="kit.close_window()">关闭</span>
+    </div>
+    <div class="kitwee-window-content">
+        <form class="layui-form" action="dd.html">
+            <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+            <div class="layui-form-item">
+                <label class="layui-form-label">输入框</label>
+                <div class="layui-input-block">
+                    <input type="text" name="somestr" placeholder="请输入" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">下拉选择框</label>
+                <div class="layui-input-block">
+                    <select name="interest" lay-filter="aihao">
+                          <option value="0">写作</option>
+                          <option value="1">阅读</option>
+                        </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">复选框</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="like[write]" title="写作">
+                    <input type="checkbox" name="like[read]" title="阅读">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">开关关</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" lay-skin="switch">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">开关开</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" checked lay-skin="switch">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">单选框</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="sex" value="0" title="男">
+                    <input type="radio" name="sex" value="1" title="女" checked>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">请填写描述</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</html>
